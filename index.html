@@ -1,160 +1,118 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Tuju Cyber | KRA, HELB, Printing Services</title>
-
-<meta name="description" content="Professional cyber services at Kimalewa Centre. Printing, KRA, HELB, NTSA and more.">
+<title>Tuju Cyber Pro Max</title>
 
 <style>
 body {margin:0;font-family:Arial;background:#f4f6f9;}
-
-header {
-  background:#0d47a1;
-  color:white;
-  text-align:center;
-  padding:20px;
-}
-
-.hero {
-  background:url('photo2.jpg') no-repeat center/cover;
-  height:220px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:white;
-  font-size:22px;
-}
-
-.card {
-  background:white;
-  margin:15px;
-  padding:15px;
-  border-radius:10px;
-}
-
-input, select, textarea {
-  width:100%;
-  padding:10px;
-  margin-bottom:10px;
-}
-
-button {
-  background:#0d47a1;
-  color:white;
-  padding:12px;
-  border:none;
-  width:100%;
-  border-radius:5px;
-}
-
-#receipt {
-  display:none;
-  border:2px dashed #0d47a1;
-  padding:15px;
-}
-
-.whatsapp {
-  position:fixed;
-  bottom:20px;
-  right:20px;
-  background:green;
-  color:white;
-  padding:15px;
-  border-radius:50%;
-}
+header {background:#0d47a1;color:white;text-align:center;padding:20px;}
+.card {background:white;margin:15px;padding:15px;border-radius:10px;}
+input,select,textarea{width:100%;padding:10px;margin-bottom:10px;}
+button{background:#0d47a1;color:white;padding:12px;border:none;width:100%;border-radius:5px;}
+#receipt{display:none;border:2px dashed #0d47a1;padding:15px;}
+.whatsapp{position:fixed;bottom:20px;right:20px;background:green;color:white;padding:15px;border-radius:50%;}
 </style>
 </head>
 
 <body>
 
 <header>
-  <h1>🔥 TUJU WA KIMALEWA CYBER</h1>
-  <p>Powered by Raphael Makhanu</p>
+<h1>🔥 TUJU CYBER PRO MAX</h1>
+<p>Powered by Raphael Makhanu</p>
 </header>
 
-<div class="hero">
-  Fast • Reliable • Affordable Services
-</div>
-
 <div class="card">
-  <h2>🛒 Place Your Order</h2>
+<h2>🛒 Place Order</h2>
 
-  <input id="name" placeholder="Your Name">
-  <input id="phone" placeholder="Phone Number">
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
 
-  <select id="service">
-    <option>Printing</option>
-    <option>KRA Services</option>
-    <option>HELB Services</option>
-    <option>NTSA Services</option>
-    <option>CV Writing</option>
-  </select>
+<select id="service">
+<option>Printing</option>
+<option>KRA Services</option>
+<option>HELB Services</option>
+<option>NTSA</option>
+</select>
 
-  <textarea id="details" placeholder="Describe your request"></textarea>
+<textarea id="details" placeholder="Details"></textarea>
 
-  <button onclick="generateReceipt()">Generate Receipt</button>
+<button onclick="createOrder()">Generate Receipt</button>
 </div>
 
 <div id="receipt" class="card">
-  <h2>🧾 RECEIPT</h2>
-  <p id="rdate"></p>
-  <p id="rref"></p>
-  <p id="rname"></p>
-  <p id="rphone"></p>
-  <p id="rservice"></p>
+<h2>🧾 RECEIPT</h2>
+<p id="rcontent"></p>
 
-  <p><b>Pay to:</b> RAPHAEL MAKHANU</p>
-  <p><b>M-Pesa:</b> 0793512145</p>
-
-  <button onclick="sendWhatsApp()">Confirm via WhatsApp</button>
+<button onclick="downloadReceipt()">Download Receipt</button>
+<button onclick="sendWhatsApp()">Send via WhatsApp</button>
 </div>
 
 <div class="card">
-  <h2>📍 Location</h2>
-  <p>Kimalewa Centre, Behind Juliana Tailor Shop</p>
-
-  <iframe 
-  src="https://maps.google.com/maps?q=Kimalewa&t=&z=13&ie=UTF8&iwloc=&output=embed"
-  width="100%" height="200"></iframe>
-</div>
-
-<div class="card">
-  <h2>💰 Prices</h2>
-  <p>Printing - Ksh 10</p>
-  <p>Photocopy - Ksh 5</p>
-  <p>Scanning - Ksh 20</p>
-  <p>KRA / HELB - Ksh 100</p>
+<h2>📊 Orders History</h2>
+<div id="history"></div>
 </div>
 
 <a class="whatsapp" href="https://wa.me/254793512145">💬</a>
 
 <script>
-function generateReceipt(){
-  let name = document.getElementById("name").value;
-  let phone = document.getElementById("phone").value;
-  let service = document.getElementById("service").value;
-  let details = document.getElementById("details").value;
+let orders = JSON.parse(localStorage.getItem("orders")||"[]");
 
-  let date = new Date().toLocaleString();
-  let ref = "TX" + Math.floor(Math.random()*100000);
+function createOrder(){
+let name = document.getElementById("name").value;
+let phone = document.getElementById("phone").value;
+let service = document.getElementById("service").value;
+let details = document.getElementById("details").value;
 
-  document.getElementById("receipt").style.display="block";
+let date = new Date().toLocaleString();
+let ref = "TX"+Math.floor(Math.random()*100000);
 
-  document.getElementById("rdate").innerHTML="Date: "+date;
-  document.getElementById("rref").innerHTML="Ref: "+ref;
-  document.getElementById("rname").innerHTML="Name: "+name;
-  document.getElementById("rphone").innerHTML="Phone: "+phone;
-  document.getElementById("rservice").innerHTML="Service: "+service+" ("+details+")";
+let text = `
+Ref: ${ref}
+Date: ${date}
+Name: ${name}
+Phone: ${phone}
+Service: ${service}
+Details: ${details}
+Pay to: RAPHAEL MAKHANU (0793512145)
+`;
+
+document.getElementById("receipt").style.display="block";
+document.getElementById("rcontent").innerText=text;
+
+orders.push(text);
+localStorage.setItem("orders", JSON.stringify(orders));
+
+showHistory();
+}
+
+function showHistory(){
+let div=document.getElementById("history");
+div.innerHTML="";
+orders.forEach(o=>{
+let p=document.createElement("p");
+p.innerText=o;
+div.appendChild(p);
+});
+}
+
+function downloadReceipt(){
+let blob = new Blob([document.getElementById("rcontent").innerText], {type: "text/plain"});
+let a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "receipt.txt";
+a.click();
 }
 
 function sendWhatsApp(){
-  let msg="Hello, I have placed an order at Tuju Cyber. Please confirm.";
-  window.open("https://wa.me/254793512145?text="+encodeURIComponent(msg));
+let msg = document.getElementById("rcontent").innerText;
+window.open("https://wa.me/254793512145?text="+encodeURIComponent(msg));
 }
+
+showHistory();
 </script>
 
 </body>
-  </html>
+</html>
