@@ -1,118 +1,45 @@
+<!-- AUTO POPUP -->
+<div id="popup" style="
+  display:none;
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:white;
+  border:1px solid #ccc;
+  padding:15px;
+  box-shadow:0 0 10px rgba(0,0,0,0.3);
+  width:250px;
+">
+  <p><b>Need help?</b></p>
+  <p>Chat with us on WhatsApp</p>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tuju Cyber Pro Max</title>
+  <a id="whatsappBtn" target="_blank">
+    <button style="background:green;color:white;padding:10px;border:none;">
+      Chat Now
+    </button>
+  </a>
 
-<style>
-body {margin:0;font-family:Arial;background:#f4f6f9;}
-header {background:#0d47a1;color:white;text-align:center;padding:20px;}
-.card {background:white;margin:15px;padding:15px;border-radius:10px;}
-input,select,textarea{width:100%;padding:10px;margin-bottom:10px;}
-button{background:#0d47a1;color:white;padding:12px;border:none;width:100%;border-radius:5px;}
-#receipt{display:none;border:2px dashed #0d47a1;padding:15px;}
-.whatsapp{position:fixed;bottom:20px;right:20px;background:green;color:white;padding:15px;border-radius:50%;}
-</style>
-</head>
-
-<body>
-
-<header>
-<h1>🔥 TUJU CYBER PRO MAX</h1>
-<p>Powered by Raphael Makhanu</p>
-</header>
-
-<div class="card">
-<h2>🛒 Place Order</h2>
-
-<input id="name" placeholder="Name">
-<input id="phone" placeholder="Phone">
-
-<select id="service">
-<option>Printing</option>
-<option>KRA Services</option>
-<option>HELB Services</option>
-<option>NTSA</option>
-</select>
-
-<textarea id="details" placeholder="Details"></textarea>
-
-<button onclick="createOrder()">Generate Receipt</button>
+  <br><br>
+  <button onclick="closePopup()">Close</button>
 </div>
-
-<div id="receipt" class="card">
-<h2>🧾 RECEIPT</h2>
-<p id="rcontent"></p>
-
-<button onclick="downloadReceipt()">Download Receipt</button>
-<button onclick="sendWhatsApp()">Send via WhatsApp</button>
-</div>
-
-<div class="card">
-<h2>📊 Orders History</h2>
-<div id="history"></div>
-</div>
-
-<a class="whatsapp" href="https://wa.me/254793512145">💬</a>
 
 <script>
-let orders = JSON.parse(localStorage.getItem("orders")||"[]");
+// Show popup after 5 seconds
+setTimeout(() => {
+  document.getElementById("popup").style.display = "block";
+}, 5000);
 
-function createOrder(){
-let name = document.getElementById("name").value;
-let phone = document.getElementById("phone").value;
-let service = document.getElementById("service").value;
-let details = document.getElementById("details").value;
-
-let date = new Date().toLocaleString();
-let ref = "TX"+Math.floor(Math.random()*100000);
-
-let text = `
-Ref: ${ref}
-Date: ${date}
-Name: ${name}
-Phone: ${phone}
-Service: ${service}
-Details: ${details}
-Pay to: RAPHAEL MAKHANU (0793512145)
-`;
-
-document.getElementById("receipt").style.display="block";
-document.getElementById("rcontent").innerText=text;
-
-orders.push(text);
-localStorage.setItem("orders", JSON.stringify(orders));
-
-showHistory();
+// Close popup
+function closePopup(){
+  document.getElementById("popup").style.display = "none";
 }
 
-function showHistory(){
-let div=document.getElementById("history");
-div.innerHTML="";
-orders.forEach(o=>{
-let p=document.createElement("p");
-p.innerText=o;
-div.appendChild(p);
-});
-}
+// WhatsApp auto message
+const phone = "254793512145"; // your number
 
-function downloadReceipt(){
-let blob = new Blob([document.getElementById("rcontent").innerText], {type: "text/plain"});
-let a = document.createElement("a");
-a.href = URL.createObjectURL(blob);
-a.download = "receipt.txt";
-a.click();
-}
+const message = "Hello Tuju Cyber, I need your services.";
 
-function sendWhatsApp(){
-let msg = document.getElementById("rcontent").innerText;
-window.open("https://wa.me/254793512145?text="+encodeURIComponent(msg));
-}
+const link = "https://wa.me/" + phone + "?text=" + encodeURIComponent(message);
 
-showHistory();
+document.getElementById("whatsappBtn").href = link;
 </script>
-
-</body>
-</html>
