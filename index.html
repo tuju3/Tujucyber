@@ -4,18 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- SEO (GOOGLE RANKING) -->
-<title>Tuju wa Kimalewa Cyber | Printing, KRA, HELB Services</title>
-<meta name="description" content="Tuju wa Kimalewa Cyber offers printing, photocopy, KRA, HELB and online services at Kimalewa Centre. Fast and affordable.">
-<meta name="keywords" content="Cyber cafe Kimalewa, printing services Kenya, KRA services, HELB services, Tuju Cyber">
-<meta name="author" content="Raphael Makhanu">
+<title>Tuju Cyber | KRA, HELB, Printing Services</title>
 
-<title>Tuju Cyber</title>
+<meta name="description" content="Professional cyber services at Kimalewa Centre. Printing, KRA, HELB, NTSA and more.">
 
 <style>
 body {margin:0;font-family:Arial;background:#f4f6f9;}
 
-/* HEADER */
 header {
   background:#0d47a1;
   color:white;
@@ -23,7 +18,143 @@ header {
   padding:20px;
 }
 
-/* LOGO */
-.logo {
+.hero {
+  background:url('photo2.jpg') no-repeat center/cover;
+  height:220px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:white;
   font-size:22px;
-  font
+}
+
+.card {
+  background:white;
+  margin:15px;
+  padding:15px;
+  border-radius:10px;
+}
+
+input, select, textarea {
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+}
+
+button {
+  background:#0d47a1;
+  color:white;
+  padding:12px;
+  border:none;
+  width:100%;
+  border-radius:5px;
+}
+
+#receipt {
+  display:none;
+  border:2px dashed #0d47a1;
+  padding:15px;
+}
+
+.whatsapp {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:green;
+  color:white;
+  padding:15px;
+  border-radius:50%;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1>🔥 TUJU WA KIMALEWA CYBER</h1>
+  <p>Powered by Raphael Makhanu</p>
+</header>
+
+<div class="hero">
+  Fast • Reliable • Affordable Services
+</div>
+
+<div class="card">
+  <h2>🛒 Place Your Order</h2>
+
+  <input id="name" placeholder="Your Name">
+  <input id="phone" placeholder="Phone Number">
+
+  <select id="service">
+    <option>Printing</option>
+    <option>KRA Services</option>
+    <option>HELB Services</option>
+    <option>NTSA Services</option>
+    <option>CV Writing</option>
+  </select>
+
+  <textarea id="details" placeholder="Describe your request"></textarea>
+
+  <button onclick="generateReceipt()">Generate Receipt</button>
+</div>
+
+<div id="receipt" class="card">
+  <h2>🧾 RECEIPT</h2>
+  <p id="rdate"></p>
+  <p id="rref"></p>
+  <p id="rname"></p>
+  <p id="rphone"></p>
+  <p id="rservice"></p>
+
+  <p><b>Pay to:</b> RAPHAEL MAKHANU</p>
+  <p><b>M-Pesa:</b> 0793512145</p>
+
+  <button onclick="sendWhatsApp()">Confirm via WhatsApp</button>
+</div>
+
+<div class="card">
+  <h2>📍 Location</h2>
+  <p>Kimalewa Centre, Behind Juliana Tailor Shop</p>
+
+  <iframe 
+  src="https://maps.google.com/maps?q=Kimalewa&t=&z=13&ie=UTF8&iwloc=&output=embed"
+  width="100%" height="200"></iframe>
+</div>
+
+<div class="card">
+  <h2>💰 Prices</h2>
+  <p>Printing - Ksh 10</p>
+  <p>Photocopy - Ksh 5</p>
+  <p>Scanning - Ksh 20</p>
+  <p>KRA / HELB - Ksh 100</p>
+</div>
+
+<a class="whatsapp" href="https://wa.me/254793512145">💬</a>
+
+<script>
+function generateReceipt(){
+  let name = document.getElementById("name").value;
+  let phone = document.getElementById("phone").value;
+  let service = document.getElementById("service").value;
+  let details = document.getElementById("details").value;
+
+  let date = new Date().toLocaleString();
+  let ref = "TX" + Math.floor(Math.random()*100000);
+
+  document.getElementById("receipt").style.display="block";
+
+  document.getElementById("rdate").innerHTML="Date: "+date;
+  document.getElementById("rref").innerHTML="Ref: "+ref;
+  document.getElementById("rname").innerHTML="Name: "+name;
+  document.getElementById("rphone").innerHTML="Phone: "+phone;
+  document.getElementById("rservice").innerHTML="Service: "+service+" ("+details+")";
+}
+
+function sendWhatsApp(){
+  let msg="Hello, I have placed an order at Tuju Cyber. Please confirm.";
+  window.open("https://wa.me/254793512145?text="+encodeURIComponent(msg));
+}
+</script>
+
+</body>
+  </html>
