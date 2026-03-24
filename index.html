@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,8 +9,8 @@
 <style>
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
+  font-family: Arial;
+  background: #f4f6f9;
 }
 
 /* HEADER */
@@ -22,116 +23,41 @@ header {
 
 /* HERO */
 .hero {
-  background: url('shop.jpg') no-repeat center/cover;
+  background: url('photo2.jpg') no-repeat center/cover;
   height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: bold;
 }
 
-/* SECTION */
+/* SECTIONS */
 section {
   padding: 20px;
 }
 
 /* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
 .gallery img {
   width: 100%;
-  margin-bottom: 10px;
   border-radius: 10px;
 }
 
-/* PRICE LIST */
-.prices {
+/* CARD */
+.card {
   background: white;
   padding: 15px;
   border-radius: 10px;
+  margin-bottom: 15px;
 }
 
 /* BUTTON */
-.whatsapp {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background: green;
-  color: white;
-  padding: 15px;
-  border-radius: 50%;
-  text-decoration: none;
-  font-size: 20px;
-}
-
-/* ANIMATION */
-.fade {
-  animation: fadeIn 2s;
-}
-@keyframes fadeIn {
-  from {opacity:0;}
-  to {opacity:1;}
-}
-</style>
-</head>
-
-<body>
-
-<header>
-  <h1>🔥 TUJU WA KIMALEWA CYBER</h1>
-  <p>Fast • Reliable • Affordable Services</p>
-</header>
-
-<div class="hero fade">
-  Welcome to Our Cyber Services
-</div>
-
-<section>
-  <h2>📍 Location</h2>
-  <p>Located at KIMALEWA CENTRE, behind Juliana Tailor Shop</p>
-</section>
-
-<section>
-  <h2>🖼️ Our Place</h2>
-  <div class="gallery fade">
-    <img src="photo1.jpg">
-    <img src="photo2.jpg">
-    <img src="photo3.jpg">
-    <img src="photo4.jpg">
-  </div>
-</section>
-
-<section class="prices fade">
-  <h2>💰 Price List</h2>
-  <p>Printing - Ksh 10 per page</p>
-  <p>Photocopy - Ksh 5</p>
-  <p>Scanning - Ksh 20</p>
-  <p>Typing - Ksh 50 per page</p>
-  <p>KRA / HELB Services - Ksh 100</p>
-</section>
-
-<section>
-  <h2>📞 Contact Us</h2>
-  <p>Phone: 0793512145</p>
-</section>
-
-<section>
-  <h2>📍 Find Us</h2>
-  <iframe 
-    src="https://maps.google.com/maps?q=Kimalewa&t=&z=13&ie=UTF8&iwloc=&output=embed"
-    width="100%" height="200" style="border:0;">
-  </iframe>
-</section>
-
-<!-- WhatsApp Button -->
-<a class="whatsapp" href="https://wa.me/254793512145">💬</a>
-
-<script>
-// Popup after 5 seconds
-setTimeout(function(){
-  alert("Welcome to Tuju Cyber! Chat with us on WhatsApp 😊");
-}, 5000);
-</script>
-
-</body>
-</html>
+button {
+  background: #0d47a1;
+  color: white
